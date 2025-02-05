@@ -1,0 +1,73 @@
+App {
+  text-align: center;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tabbar {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tab-item {
+  flex-grow: 1;
+  padding: 12px;
+  text-align: center;
+  background-color: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.tab-item.active {
+  background-color: #6200ea;
+  color: white;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 16px;
+  color: #6200ea;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.data-table th {
+  background-color: #f4f4f4;
+}
+
+.placeholder {
+  padding: 20px;
+  color: #757575;
+  font-size: 18px;
+  text-align: center;
+}
+
+.loading {
+  font-size: 24px;
+  color: #6200ea;
+  margin-top: 20px;
+}
