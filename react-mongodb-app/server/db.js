@@ -1,4 +1,6 @@
 // db.js
+const NodeStatus = require('./models/DataModel');
+
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -11,17 +13,20 @@ const connectDB = async (io) => {
     });
     console.log('MongoDB connected successfully!');
 
-    // Once connected, set up a change stream on the collection
     const db = mongoose.connection;
-    // NOTE: Adjust the collection name if needed.
-    // By default, if your model is "NodeStatus", the collection name will likely be "nodestatuses".
-    const changeStream = db.collection('nodestatuses').watch();
+    const changeStream = db.collection('nodestatusdb').watch();
 
-    changeStream.on('change', (change) => {
-      console.log('Change detected in MongoDB:', change);
-      // Emit the change to all connected clients
-      io.emit('data-updated', change);
+    changeStream.on('change', async (change) => {
+      console.log('Database change detected:', change);
+      try {
+        const updatedData = await NodeStatus.find();
+        io.emit('dbUpdate', updatedData); // Now matches client listener
+      } catch (error) {
+        console.error('Error fetching updated data:', error);
+      }
     });
+
+
   } catch (error) {
     console.error('MongoDB connection error:', error.message);
     console.error('Please check:');

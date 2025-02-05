@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-connectDB();
+connectDB(io);
 
 // API Route for initial data loading
 app.get('/api/data', async (req, res) => {
@@ -42,12 +42,12 @@ io.on('connection', (socket) => {
   });
 });
 
-// MongoDB change stream setup
+// MongoDB change stream setup (Emitter)
 const mongoose = require('mongoose');
 mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB, setting up change streams...');
 
-  const nodeStatusCollection = mongoose.connection.collection('nodestatuses');
+  const nodeStatusCollection = mongoose.connection.collection('nodestatusdb');
   const changeStream = nodeStatusCollection.watch();
 
   changeStream.on('change', async (change) => {
@@ -55,7 +55,7 @@ mongoose.connection.once('open', () => {
 
     try {
       const updatedData = await NodeStatus.find();
-      io.emit('dataUpdate', updatedData);
+      io.emit('dbUpdate', updatedData);
     } catch (error) {
       console.error('Error fetching updated data:', error);
     }

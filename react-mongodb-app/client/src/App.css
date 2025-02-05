@@ -1,9 +1,11 @@
-App {
+/* General App Styles */
+.app {
   text-align: center;
   padding: 20px;
   font-family: 'Poppins', sans-serif;
 }
 
+/* TabBar */
 .tabbar {
   display: flex;
   justify-content: space-around;
@@ -29,6 +31,7 @@ App {
   color: white;
 }
 
+/* Table Styles */
 .table-container {
   overflow-x: auto;
   background: white;
@@ -53,12 +56,14 @@ App {
 .data-table td {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 .data-table th {
   background-color: #f4f4f4;
 }
 
+/* Placeholder & Loading */
 .placeholder {
   padding: 20px;
   color: #757575;
